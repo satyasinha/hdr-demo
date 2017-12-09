@@ -1,5 +1,7 @@
 # hdr-demo
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/satyasinha/hdr-demo.svg)](https://greenkeeper.io/)
+
 > Project to demonstrate simulated IoT logs to Interactome using  nodered, D3 & vue
 
 ## Build Setup
