@@ -21,6 +21,12 @@
 </template>
 
 <script>
+import ArtificialIoT from '../classes/artificial-iot'
+
+const device = new ArtificialIoT()
+console.log('new device creatred:')
+console.log(device.getSensorData())
+console.log(ArtificialIoT.showMinMaxSensorType('temperature'))
 export default {
   name: 'HelloWorld',
   data () {
