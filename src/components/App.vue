@@ -7,7 +7,7 @@
     <div id="content">
       <interactome :data="devices"></interactome>
       <div id="sidebar">
-        <button>Add Device</button>
+        <button @click="addDevice">Add Device</button>
         <detail></detail>
         <stats></stats>
       </div>
@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 import Detail from './Detail.vue'
 import Interactome from './Interactome.vue'
 import Stats from './Stats.vue'
@@ -32,6 +33,11 @@ export default {
       title: 'Simme',
       description: 'Simme (Simulated Interactome) demonstrates functional interactions between IoT devices via simulated IoT logs being rendered as an Interactome'
     }
+  },
+  methods: {
+    ...mapMutations([
+      'addDevice'
+    ])
   }
 }
 </script>
