@@ -1,13 +1,16 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    {{ devices }}
   </div>
 </template>
 
 <script>
 export default {
-  name: 'app'
+  computed: {
+    devices () {
+      return this.$store.state.devicesSensorData
+    }
+  }
 }
 </script>
 
