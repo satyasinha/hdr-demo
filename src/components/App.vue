@@ -1,26 +1,68 @@
 <template>
   <div id="app">
-    {{ devices }}
+    <div id="heading">
+      <h1>{{ title }}</h1>
+      <p>{{ description }}</p>
+    </div>
+    <div id="content">
+      <interactome :data="devices"></interactome>
+      <div id="sidebar">
+        <button @click="addDevice">Add Device</button>
+        <detail></detail>
+        <stats></stats>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+import Detail from './Detail.vue'
+import Interactome from './Interactome.vue'
+import Stats from './Stats.vue'
+
 export default {
+  components: { Detail, Interactome, Stats },
   computed: {
     devices () {
       return this.$store.state.devicesSensorData
     }
+  },
+  data () {
+    return {
+      title: 'Simme',
+      description: 'Simme (Simulated Interactome) demonstrates functional interactions between IoT devices via simulated IoT logs being rendered as an Interactome'
+    }
+  },
+  methods: {
+    ...mapMutations([
+      'addDevice'
+    ])
   }
 }
 </script>
 
 <style>
+body {
+  height: 80vh;
+}
+
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  width: 100%;
+  height: 100%;
+}
+
+#content {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  height: 100%;
+}
+
+#sidebar {
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 </style>
