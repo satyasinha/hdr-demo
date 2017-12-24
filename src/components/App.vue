@@ -8,15 +8,20 @@
       <interactome :data="devices"></interactome>
       <div id="sidebar">
         <button>Add Device</button>
+        <detail></detail>
+        <stats></stats>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Detail from './Detail.vue'
 import Interactome from './Interactome.vue'
+import Stats from './Stats.vue'
+
 export default {
-  components: { Interactome },
+  components: { Detail, Interactome, Stats },
   computed: {
     devices () {
       return this.$store.state.devicesSensorData
@@ -32,15 +37,26 @@ export default {
 </script>
 
 <style>
+body {
+  height: 80vh;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+}
+
 #content {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
+  height: 100%;
 }
 
 #sidebar {
   width: 150px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 </style>
