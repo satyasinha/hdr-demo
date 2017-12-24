@@ -1,8 +1,14 @@
 <template>
   <div id="app">
-    <interactome :data="devices"></interactome>
-    <div id="sidebar">
-      <button></button>
+    <div id="heading">
+      <h1>{{ title }}</h1>
+      <p>{{ description }}</p>
+    </div>
+    <div id="content">
+      <interactome :data="devices"></interactome>
+      <div id="sidebar">
+        <button>Add Device</button>
+      </div>
     </div>
   </div>
 </template>
@@ -15,17 +21,26 @@ export default {
     devices () {
       return this.$store.state.devicesSensorData
     }
+  },
+  data () {
+    return {
+      title: 'Simme',
+      description: 'Simme (Simulated Interactome) demonstrates functional interactions between IoT devices via simulated IoT logs being rendered as an Interactome'
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+#content {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+#sidebar {
+  width: 150px;
+  display: flex;
+  flex-direction: column;
 }
 </style>
