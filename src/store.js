@@ -28,6 +28,10 @@ const mutations = {
   }
 }
 
+const getters = {
+  devices: state => Object.values(state.devicesSensorData)
+}
+
 const actions = {
   run ({ commit, state }) {
     setInterval(() => {
@@ -40,5 +44,5 @@ const actions = {
 }
 
 export default new Vuex.Store({
-  state, mutations, actions
+  state, getters, mutations, actions
 })
