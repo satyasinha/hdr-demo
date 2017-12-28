@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import Detail from './Detail.vue'
 import Interactome from './Interactome.vue'
 import Stats from './Stats.vue'
@@ -35,7 +35,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations([
+    ...mapActions([
       'addDevice'
     ])
   }
