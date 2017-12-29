@@ -5,7 +5,7 @@
       <p>{{ description }}</p>
     </div>
     <div id="content">
-      <interactome :data="devices"></interactome>
+      <interactome :nodes="nodes" :edges="edges"></interactome>
       <div id="sidebar">
         <button @click="addDevice">Add Device</button>
         <detail></detail>
@@ -25,7 +25,8 @@ export default {
   components: { Detail, Interactome, Stats },
   computed: {
     ...mapGetters([
-      'devices'
+      'nodes',
+      'edges'
     ])
   },
   data () {

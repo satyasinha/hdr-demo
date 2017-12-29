@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { concat, intersection, keys, last, omit, values } from 'lodash'
+import { concat, intersection, keys, values } from 'lodash'
 
 import ArtificialIoT from './classes/ArtificialIoT'
 
@@ -10,12 +10,10 @@ const INTERVAL = 500
 
 const _buildRelationships = (devices, device) => {
   const relationships = []
-  // TODO should not need to omit 'id'
-  // but have to so it's not counted as a sensor
-  const deviceKeys = keys(omit(device, 'id'))
+  const deviceKeys = keys(device)
   values(devices).forEach((d) => {
     const commonSensors = intersection(keys(d), deviceKeys)
-    if (commonSensors.length > 0) {
+    if (commonSensors.length > 0 && d.id !== device.id) {
       relationships.push(
         {
           source: device.id,
@@ -38,14 +36,13 @@ const state = {
 }
 
 const mutations = {
-  addDevice (state) {
-    console.log('adding device')
-    state.devices.push(new ArtificialIoT())
+  addDevice (state, device) {
+    // console.log('adding device')
+    state.devices.push(device)
   },
-  buildRelationships (state) {
-    console.log('building relationships')
-    const recentDevice = last(state.devices)
-    const sensorData = recentDevice.getSensorData()
+  buildRelationships (state, device) {
+    // console.log('building relationships')
+    const sensorData = device.getSensorData()
     state.relatedDevices = concat(state.relatedDevices, _buildRelationships(state.devicesSensorData, sensorData))
   },
   updateDeviceSensorData (state, update) {
@@ -59,18 +56,23 @@ const mutations = {
 }
 
 const getters = {
-  devices: state => values(state.devicesSensorData)
+  nodes: state => values(state.devicesSensorData),
+  edges: state => state.relatedDevices
 }
 
 const actions = {
-  addDevice ({ commit, state }) {
-    commit('addDevice')
-    commit('buildRelationships')
+  addDevice ({ commit, dispatch, state }) {
+    const device = new ArtificialIoT()
+    commit('addDevice', device)
+    // dispatch('run')
+    commit('updateDeviceSensorData', device.getSensorData())
+    commit('buildRelationships', device)
   },
   run ({ commit, state }) {
     setInterval(() => {
       state.devices.forEach((device) => {
         commit('updateDeviceSensorData', device.getSensorData())
+        commit('buildRelationships', device)
       })
       console.info(state.devicesSensorData)
     }, INTERVAL)

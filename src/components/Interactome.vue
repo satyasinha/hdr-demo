@@ -6,12 +6,17 @@
 import Interactome from '../classes/Interactome'
 
 export default {
-  props: ['data'],
+  props: ['nodes', 'edges'],
   watch: {
-    data: function (newData) {
+    nodes: function (newNodes) {
       // TODO resize d3 somehow....
       // console.log('element: ', this.$el.clientWidth, this.$el.clientHeight)
-      this.Interactome.arrangeData(newData)
+      // console.log('nodes are being added', newNodes)
+      this.Interactome.arrangeNodes(newNodes)
+    },
+    edges: function (newEdges) {
+      console.log('edges: ', newEdges)
+      this.Interactome.arrangeEdges(newEdges)
     }
   },
   mounted: function () {
