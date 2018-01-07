@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import Detail from './Detail.vue'
 import Interactome from './Interactome.vue'
 import Stats from './Stats.vue'
@@ -24,9 +24,9 @@ import Stats from './Stats.vue'
 export default {
   components: { Detail, Interactome, Stats },
   computed: {
-    devices () {
-      return this.$store.state.devicesSensorData
-    }
+    ...mapGetters([
+      'devices'
+    ])
   },
   data () {
     return {
