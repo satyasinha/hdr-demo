@@ -13,4 +13,4 @@ new Vue({
   render: h => h(App)
 })
 
-store.dispatch('run')
+// store.dispatch('run')

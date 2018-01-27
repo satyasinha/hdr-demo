@@ -5,7 +5,7 @@
       <p>{{ description }}</p>
     </div>
     <div id="content">
-      <interactome :data="devices"></interactome>
+      <interactome :nodes="nodes" :edges="edges"></interactome>
       <div id="sidebar">
         <button @click="addDevice">Add Device</button>
         <detail></detail>
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import Detail from './Detail.vue'
 import Interactome from './Interactome.vue'
 import Stats from './Stats.vue'
@@ -25,7 +25,8 @@ export default {
   components: { Detail, Interactome, Stats },
   computed: {
     ...mapGetters([
-      'devices'
+      'nodes',
+      'edges'
     ])
   },
   data () {
@@ -35,7 +36,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations([
+    ...mapActions([
       'addDevice'
     ])
   }
