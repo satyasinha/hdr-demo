@@ -1,23 +1,36 @@
 import * as d3 from 'd3'
 
 class Interactome {
+  _cleanup () {
+    // this.simulation.stop()
+    const dots = this.svg
+      .selectAll('circle')
+      .data(this.nodes)
+
+    const lines = this.svg
+      .selectAll('line')
+      .data(this.edges)
+
+    lines.exit().remove()
+    dots.exit().remove()
+  }
+
   _restart () {
     // this.simulation.stop()
     const dots = this.svg
       .selectAll('circle')
       .data(this.nodes)
 
-    dots.exit().remove()
+    const lines = this.svg
+      .selectAll('line')
+      .data(this.edges)
+
     dots.enter().append('circle')
         .attr('r', 10)
         .attr('fill', 'gray').merge(dots)
         // .attr('cx', this.svg.attr('width') / 2)
         // .attr('cy', this.svg.attr('height') / 2)
 
-    const lines = this.svg
-      .selectAll('line')
-      .data(this.edges)
-    lines.exit().remove()
     lines
       .enter().append('line')
       .attr('stroke-width', 1)
