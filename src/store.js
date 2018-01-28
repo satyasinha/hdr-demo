@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { concat, find, intersection, values } from 'lodash'
+import { concat, intersection, values } from 'lodash'
 
 import ArtificialIoT from './devices/ArtificialIoT'
 
@@ -27,11 +27,9 @@ const mutations = {
     const relationships = []
     state.devices.forEach(d => {
       const commonSensors = intersection(d.getSensors(), device.getSensors())
-      const sourceId = device.getId()
-      const targetId = d.getId()
-      if (commonSensors.length > 0 && sourceId !== targetId) {
-        const source = find(state.deviceObjects, { id: sourceId })
-        const target = find(state.deviceObjects, { id: targetId })
+      const source = device.getId()
+      const target = d.getId()
+      if (commonSensors.length > 0 && source !== target) {
         relationships.push({
           source,
           target,

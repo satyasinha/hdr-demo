@@ -44,12 +44,12 @@ export default {
     ])
   },
   mounted () {
-    // setInterval(function () {
-    //   this.updateLogs()
-    //   map(this.logs, log => {
-    //     console.log(JSON.stringify(log))
-    //   })
-    // }.bind(this), 1000)
+    setInterval(function () {
+      this.updateLogs()
+      map(this.logs, log => {
+        console.log(JSON.stringify(log))
+      })
+    }.bind(this), 1000)
   }
 }
 </script>
