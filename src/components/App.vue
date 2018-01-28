@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import { map } from 'lodash'
 import { mapGetters, mapActions } from 'vuex'
 import Detail from './Detail.vue'
 import Interactome from './Interactome.vue'
@@ -25,8 +26,9 @@ export default {
   components: { Detail, Interactome, Stats },
   computed: {
     ...mapGetters([
-      'nodes',
-      'edges'
+      'edges',
+      'logs',
+      'nodes'
     ])
   },
   data () {
@@ -37,8 +39,17 @@ export default {
   },
   methods: {
     ...mapActions([
-      'addDevice'
+      'addDevice',
+      'updateLogs'
     ])
+  },
+  mounted () {
+    setInterval(function () {
+      this.updateLogs()
+      map(this.logs, log => {
+        console.log(JSON.stringify(log))
+      })
+    }.bind(this), 1000)
   }
 }
 </script>

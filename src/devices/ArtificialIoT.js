@@ -1,4 +1,4 @@
-import { filter, has, isEmpty } from 'lodash'
+import { has, filter, isEmpty, keys, omit } from 'lodash'
 import uuid from 'uuid/v4'
 
 const SENSOR_TYPES = [
@@ -55,7 +55,16 @@ class ArtificialIoT {
     }
   }
 
-  getSensorData () {
+  getId () {
+    return this.id
+  }
+
+  getSensors () {
+    // id is not a sensor so exclude it
+    return keys(omit(this, 'id'))
+  }
+
+  getData () {
     // temperature sensor data
     if (has(this, SENSOR_TYPES[0])) {
       this[SENSOR_TYPES[0]] = `${ArtificialIoT.generateSensorValue(SENSOR_TYPES[0]).toFixed(2)} °C`
