@@ -1,53 +1,49 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { concat, intersection, keys, values } from 'lodash'
+import { concat, find, intersection, values } from 'lodash'
 
-import ArtificialIoT from './classes/ArtificialIoT'
+import ArtificialIoT from './devices/ArtificialIoT'
 
 Vue.use(Vuex)
 
-const INTERVAL = 500
-
-const _buildRelationships = (devices, device) => {
-  const relationships = []
-  const deviceKeys = keys(device)
-  values(devices).forEach((d) => {
-    const commonSensors = intersection(keys(d), deviceKeys)
-    if (commonSensors.length > 0 && d.id !== device.id) {
-      relationships.push(
-        {
-          source: device.id,
-          target: d.id,
-          commonSensors
-        }
-      )
-    }
-  })
-
-  return relationships
-}
-
 const state = {
   // the 'real' devices
-  devices: [new ArtificialIoT()],
+  devices: [],
+  deviceObjects: [],
   // the data capture for the devices
-  devicesSensorData: {},
+  sensorData: {},
   relatedDevices: []
 }
 
 const mutations = {
   addDevice (state, device) {
-    // console.log('adding device')
     state.devices.push(device)
   },
-  buildRelationships (state, device) {
-    // console.log('building relationships')
-    const sensorData = device.getSensorData()
-    state.relatedDevices = concat(state.relatedDevices, _buildRelationships(state.devicesSensorData, sensorData))
+  addDeviceObject (state, device) {
+    const id = device.getId()
+    state.deviceObjects.push({ id })
   },
-  updateDeviceSensorData (state, update) {
-    state.devicesSensorData = {
-      ...state.devicesSensorData,
+  buildRelationships (state, device) {
+    const relationships = []
+    state.devices.forEach(d => {
+      const commonSensors = intersection(d.getSensors(), device.getSensors())
+      const sourceId = device.getId()
+      const targetId = d.getId()
+      if (commonSensors.length > 0 && sourceId !== targetId) {
+        const source = find(state.deviceObjects, { id: sourceId })
+        const target = find(state.deviceObjects, { id: targetId })
+        relationships.push({
+          source,
+          target,
+          commonSensors
+        })
+      }
+    })
+    state.relatedDevices = concat(state.relatedDevices, relationships)
+  },
+  updateLog (state, update) {
+    state.sensorData = {
+      ...state.sensorData,
       [update.id]: {
         ...update
       }
@@ -56,26 +52,22 @@ const mutations = {
 }
 
 const getters = {
-  nodes: state => values(state.devicesSensorData),
-  edges: state => state.relatedDevices
+  edges: state => state.relatedDevices,
+  logs: state => values(state.sensorData),
+  nodes: state => state.deviceObjects
 }
 
 const actions = {
   addDevice ({ commit, dispatch, state }) {
     const device = new ArtificialIoT()
     commit('addDevice', device)
-    // dispatch('run')
-    commit('updateDeviceSensorData', device.getSensorData())
+    commit('addDeviceObject', device)
     commit('buildRelationships', device)
   },
-  run ({ commit, state }) {
-    setInterval(() => {
-      state.devices.forEach((device) => {
-        commit('updateDeviceSensorData', device.getSensorData())
-        commit('buildRelationships', device)
-      })
-      console.info(state.devicesSensorData)
-    }, INTERVAL)
+  updateLogs ({ commit, state }) {
+    state.devices.forEach((device) => {
+      commit('updateLog', device.getData())
+    })
   }
 }
 

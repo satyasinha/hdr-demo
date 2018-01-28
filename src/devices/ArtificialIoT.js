@@ -1,4 +1,4 @@
-import { filter, has, isEmpty, keys } from 'lodash'
+import { has, filter, isEmpty, keys, omit } from 'lodash'
 import uuid from 'uuid/v4'
 
 const SENSOR_TYPES = [
@@ -61,7 +61,7 @@ class ArtificialIoT {
 
   getSensors () {
     // id is not a sensor so exclude it
-    return filter(keys(this), 'id')
+    return keys(omit(this, 'id'))
   }
 
   getData () {
