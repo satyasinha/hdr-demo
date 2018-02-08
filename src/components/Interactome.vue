@@ -28,6 +28,12 @@ export default {
       const dots = this.svg
         .selectAll('circle')
         .data(this.nodes)
+        .on('mouseover', function () {
+          d3.select(this).attr('r', 15)
+        })
+        .on('mouseout', function () {
+          d3.select(this).attr('r', 10)
+        })
 
       dots
         .exit().remove()
@@ -45,13 +51,20 @@ export default {
       const lines = this.svg
         .selectAll('line')
         .data(this.edges)
+        .on('mouseover', function () {
+          d3.select(this).attr('stroke-width', 8)
+        })
+        .on('mouseout', function () {
+          d3.select(this).attr('stroke-width', 5)
+        })
 
       lines
         .exit().remove()
       lines
         .enter().append('line')
-        .attr('stroke-width', 1)
+        .attr('stroke-width', 5)
         .attr('stroke', 'black').merge(lines)
+
       return lines
     },
 
@@ -87,7 +100,7 @@ export default {
     },
     simulation () {
       // stop the simulation, set alpha (currently default) and set nodes
-      let sim = d3.forceSimulation().stop().nodes(this.nodes)
+      let sim = d3.forceSimulation().nodes(this.nodes)
 
       sim
         // set the charge
