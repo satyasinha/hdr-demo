@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { map } from 'lodash'
+// import { map } from 'lodash'
 import { mapGetters, mapActions } from 'vuex'
 import Detail from './Detail.vue'
 import Interactome from './Interactome.vue'
@@ -46,9 +46,9 @@ export default {
   mounted () {
     setInterval(function () {
       this.updateLogs()
-      map(this.logs, log => {
-        console.log(JSON.stringify(log))
-      })
+      // map(this.logs, log => {
+      //   console.log(JSON.stringify(log))
+      // })
     }.bind(this), 1000)
   }
 }
