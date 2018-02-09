@@ -7,19 +7,22 @@ import * as d3 from 'd3'
 
 export default {
   props: ['nodes', 'edges'],
+
   watch: {
     nodes: function (newNodes) {
-      this.arrangeNodes(newNodes)
+      this.nodes = newNodes
       this.reset()
     },
     edges: function (newEdges) {
-      this.arrangeEdges(newEdges)
+      this.edges = newEdges
       this.reset()
     }
   },
+
   mounted: function () {
     this.initiate()
   },
+
   methods: {
     dots () {
       const dots = this.svg
@@ -32,8 +35,12 @@ export default {
         .enter().append('circle')
         .attr('r', 10)
         .attr('fill', 'gray').merge(dots)
+        .attr('cx', this.width / 2)
+        .attr('cy', this.height / 2)
+
       return dots
     },
+
     lines () {
       const lines = this.svg
         .selectAll('line')
@@ -47,20 +54,15 @@ export default {
         .attr('stroke', 'black').merge(lines)
       return lines
     },
-    arrangeNodes (nodes) {
-      this.nodes = nodes
-    },
-    arrangeEdges (edges) {
-      this.edges = edges
-    },
+
     initiate () {
       this.width = this.$el.clientWidth
       this.height = this.$el.clientHeight
       this.svg = d3.select('svg')
         .attr('width', this.width)
         .attr('height', this.height)
-      this.reset()
     },
+
     reset () {
       if (this.interactome) this.interactome.stop()
       this.interactome = this.simulation()
@@ -69,18 +71,18 @@ export default {
       this.interactome.force('link').links(this.edges)
       this.interactome.restart()
 
-      const dots = this.dots()
-      const lines = this.lines()
-
       this.interactome.on('tick', () => {
+        const dots = this.dots()
+        const lines = this.lines()
+
         dots
-          .attr('cx', node => node.x)
-          .attr('cy', node => node.y)
+          .attr('cx', node => node.x || this.width / 2)
+          .attr('cy', node => node.y || this.height / 2)
         lines
-          .attr('x1', edge => edge.source.x)
-          .attr('y1', edge => edge.source.y)
-          .attr('x2', edge => edge.target.x)
-          .attr('y2', edge => edge.target.y)
+          .attr('x1', edge => edge.source.x || 0)
+          .attr('y1', edge => edge.source.y || 0)
+          .attr('x2', edge => edge.target.x || 0)
+          .attr('y2', edge => edge.target.y || 0)
       })
     },
     simulation () {
@@ -98,8 +100,6 @@ export default {
         .force('x', d3.forceX())
         // set y force
         .force('y', d3.forceY())
-        // set alpha target
-        .alphaTarget(1)
 
       return sim
     }
