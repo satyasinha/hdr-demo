@@ -52,7 +52,9 @@ const mutations = {
 const getters = {
   edges: state => state.relatedDevices,
   logs: state => values(state.sensorData),
-  nodes: state => state.deviceObjects
+  nodes: state => state.deviceObjects,
+  totalEdges: state => state.relatedDevices.length,
+  totalNodes: state => state.deviceObjects.length
 }
 
 const actions = {
