@@ -10,6 +10,7 @@ const state = {
   // the 'real' devices
   devices: [],
   deviceObjects: [],
+  selected: {},
   // the data capture for the devices
   sensorData: {},
   relatedDevices: []
@@ -39,6 +40,12 @@ const mutations = {
     })
     state.relatedDevices = concat(state.relatedDevices, relationships)
   },
+  selectEdge (state, index) {
+    state.selected = { ...state.relatedDevices[index].commonSensors }
+  },
+  selectNode (state, index) {
+    state.selected = { ...state.devices[index] }
+  },
   updateLog (state, update) {
     state.sensorData = {
       ...state.sensorData,
@@ -53,12 +60,13 @@ const getters = {
   edges: state => state.relatedDevices,
   logs: state => values(state.sensorData),
   nodes: state => state.deviceObjects,
+  selected: state => state.selected,
   totalEdges: state => state.relatedDevices.length,
   totalNodes: state => state.deviceObjects.length
 }
 
 const actions = {
-  addDevice ({ commit, dispatch, state }) {
+  addDevice ({ commit }) {
     const device = new ArtificialIoT()
     commit('addDevice', device)
     commit('addDeviceObject', device)
@@ -68,6 +76,12 @@ const actions = {
     state.devices.forEach((device) => {
       commit('updateLog', device.getData())
     })
+  },
+  selectEdge ({ commit }, index) {
+    commit('selectEdge', index)
+  },
+  selectNode ({ commit }, index) {
+    commit('selectNode', index)
   }
 }
 

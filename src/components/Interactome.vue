@@ -4,6 +4,7 @@
 
 <script>
 import * as d3 from 'd3'
+import { mapActions } from 'vuex'
 
 export default {
   props: ['nodes', 'edges'],
@@ -24,7 +25,12 @@ export default {
   },
 
   methods: {
+    ...mapActions([
+      'selectEdge',
+      'selectNode'
+    ]),
     dots () {
+      const selectNode = this.selectNode
       const dots = this.svg
         .selectAll('circle')
         .data(this.nodes)
@@ -33,6 +39,9 @@ export default {
         })
         .on('mouseout', function () {
           d3.select(this).attr('r', 10)
+        })
+        .on('click', function (data) {
+          selectNode(data.index)
         })
 
       dots
@@ -48,6 +57,7 @@ export default {
     },
 
     lines () {
+      const selectEdge = this.selectEdge
       const lines = this.svg
         .selectAll('line')
         .data(this.edges)
@@ -56,6 +66,9 @@ export default {
         })
         .on('mouseout', function () {
           d3.select(this).attr('stroke-width', 5)
+        })
+        .on('click', function (data) {
+          selectEdge(data.index)
         })
 
       lines
