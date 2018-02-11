@@ -4,6 +4,7 @@
 
 <script>
 import * as d3 from 'd3'
+import { mapActions } from 'vuex'
 
 export default {
   props: ['nodes', 'edges'],
@@ -24,10 +25,24 @@ export default {
   },
 
   methods: {
+    ...mapActions([
+      'selectEdge',
+      'selectNode'
+    ]),
     dots () {
+      const selectNode = this.selectNode
       const dots = this.svg
         .selectAll('circle')
         .data(this.nodes)
+        .on('mouseover', function () {
+          d3.select(this).attr('r', 15)
+        })
+        .on('mouseout', function () {
+          d3.select(this).attr('r', 10)
+        })
+        .on('click', function (data) {
+          selectNode(data.index)
+        })
 
       dots
         .exit().remove()
@@ -42,16 +57,27 @@ export default {
     },
 
     lines () {
+      const selectEdge = this.selectEdge
       const lines = this.svg
         .selectAll('line')
         .data(this.edges)
+        .on('mouseover', function () {
+          d3.select(this).attr('stroke-width', 8)
+        })
+        .on('mouseout', function () {
+          d3.select(this).attr('stroke-width', 5)
+        })
+        .on('click', function (data) {
+          selectEdge(data.index)
+        })
 
       lines
         .exit().remove()
       lines
         .enter().append('line')
-        .attr('stroke-width', 1)
+        .attr('stroke-width', 5)
         .attr('stroke', 'black').merge(lines)
+
       return lines
     },
 
@@ -87,7 +113,7 @@ export default {
     },
     simulation () {
       // stop the simulation, set alpha (currently default) and set nodes
-      let sim = d3.forceSimulation().stop().nodes(this.nodes)
+      let sim = d3.forceSimulation().nodes(this.nodes)
 
       sim
         // set the charge
