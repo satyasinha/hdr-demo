@@ -1,0 +1,41 @@
+{
+  "type": "iot",
+  "schema": [
+    {
+      "name": "coffee pot",
+      "description": "A pot that has sensors for temperatue and volume of water",
+      "sensors": [
+        {
+          "type": "temperature",
+          "units": "°C",
+          "max": "100",
+          "min": "15"
+        },
+        {
+          "type": "volume",
+          "units": "ml",
+          "max": "500",
+          "min": "10"
+        }
+      ]
+    },
+    {
+      "name": "coffee grinder",
+      "description": "Coffee grinder that grinds coffee at certain detected temperature threshold",
+      "sensors": [
+        {
+          "type": "temperature",
+          "units": "°C",
+          "max": "100",
+          "min": "15"
+        },
+        {
+          "type": "weight",
+          "units": "g",
+          "max": "200",
+          "min": "40"
+        }
+      ]
+    }
+  ]
+}
