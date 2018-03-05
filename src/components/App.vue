@@ -13,7 +13,7 @@
             {{ schema }}
           </option>
         </select>
-        <button @click="addDevice">Add Device</button>
+        <button @click="addDevice()">Add Device</button>
         <detail></detail>
         <stats></stats>
       </div>

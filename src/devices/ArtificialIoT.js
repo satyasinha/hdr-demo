@@ -1,58 +1,23 @@
-import { has, filter, isEmpty, keys, omit } from 'lodash'
 import uuid from 'uuid/v4'
 
-const SENSOR_TYPES = [
-  'temperature',
-  'light',
-  'velocity'
-]
+import DEFAULT from '../schemas/default.json'
 
-const SENSOR_VALUE_RANGE = {
-  temperature: {
-    max: 35, min: 15
-  },
-  light: {
-    max: 25000, min: 0.001
-  },
-  velocity: {
-    max: 100, min: 0
-  }
-}
+const DEFAULT_SENSORS = DEFAULT.nodes[0].sensors
 
 /**
- * ArtificalIOT class expects a 'sensorTypes' parameter to
+ * ArtificalIoT class expects a 'sensorTypes' parameter to
  * include one or more sensor types listed in SENSOR_TYPES
  */
 class ArtificialIoT {
-  _assignSensors (sensorTypes) {
-    // if sensorTypes is empty assign a single sensor
-    if (isEmpty(sensorTypes)) {
-      sensorTypes = [SENSOR_TYPES[Math.floor(Math.random() * SENSOR_TYPES.length)]]
-    }
-
-    sensorTypes.forEach((sensor) => {
-      this[sensor] = ''
-    })
+  static generateSensorValue (max, min, digits) {
+    const value = Math.random() * (max - min) + min
+    return value.toFixed(digits)
   }
 
-  static generateSensorValue (sensorType) {
-    const max = SENSOR_VALUE_RANGE[sensorType].max
-    const min = SENSOR_VALUE_RANGE[sensorType].min
-    return Math.random() * (max - min) + min
-  }
-
-  static showMinMaxSensorType (sensorType) {
-    return SENSOR_VALUE_RANGE[sensorType]
-  }
-
-  constructor (sensorTypes = []) {
+  constructor (sensors = [DEFAULT_SENSORS[Math.floor(Math.random() * DEFAULT_SENSORS.length)]]) {
     this.id = uuid()
-    // assigns sensors randomly unless they exist
-    if (isEmpty(sensorTypes)) {
-      this._assignSensors(filter(SENSOR_TYPES, () => Math.random() >= 0.5))
-    } else {
-      this._assignSensors(sensorTypes)
-    }
+    this.sensors = sensors
+    this.fetchData()
   }
 
   getId () {
@@ -60,27 +25,26 @@ class ArtificialIoT {
   }
 
   getSensors () {
-    // id is not a sensor so exclude it
-    return keys(omit(this, 'id'))
+    return this.sensors.map(sensor => sensor.type)
   }
 
   getData () {
-    // temperature sensor data
-    if (has(this, SENSOR_TYPES[0])) {
-      this[SENSOR_TYPES[0]] = `${ArtificialIoT.generateSensorValue(SENSOR_TYPES[0]).toFixed(2)} °C`
-    }
+    return this.data
+  }
 
-    // light sensor data
-    if (has(this, SENSOR_TYPES[1])) {
-      this[SENSOR_TYPES[1]] = `${ArtificialIoT.generateSensorValue(SENSOR_TYPES[1]).toFixed(3)} lux`
-    }
+  fetchData () {
+    const data = { id: this.id }
 
-    // velocity sensor data
-    if (has(this, SENSOR_TYPES[2])) {
-      this[SENSOR_TYPES[2]] = `${ArtificialIoT.generateSensorValue(SENSOR_TYPES[2]).toFixed(2)} m/sec`
-    }
+    this.sensors.forEach(sensor => {
+      const value = ArtificialIoT.generateSensorValue(
+        parseInt(sensor.max),
+        parseInt(sensor.min),
+        parseInt(sensor.digits)
+      )
+      data[sensor.type] = `${value} ${sensor.units}`
+    })
 
-    return this
+    this.data = data
   }
 }
 

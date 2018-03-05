@@ -1,6 +1,6 @@
 {
   "type": "iot",
-  "schema": [
+  "nodes": [
     {
       "name": "coffee pot",
       "description": "A pot that has sensors for temperatue and volume of water",
@@ -9,13 +9,15 @@
           "type": "temperature",
           "units": "°C",
           "max": "100",
-          "min": "15"
+          "min": "15",
+          "digits": "2"
         },
         {
           "type": "volume",
           "units": "ml",
           "max": "500",
-          "min": "10"
+          "min": "10",
+          "digits": "3"
         }
       ]
     },
@@ -27,13 +29,15 @@
           "type": "temperature",
           "units": "°C",
           "max": "100",
-          "min": "15"
+          "min": "15",
+          "digits": "2"
         },
         {
           "type": "weight",
           "units": "g",
           "max": "200",
-          "min": "40"
+          "min": "40",
+          "digits": "0"
         }
       ]
     }

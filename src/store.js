@@ -6,7 +6,7 @@ import ArtificialIoT from './devices/ArtificialIoT'
 
 Vue.use(Vuex)
 
-const state = {
+const initialState = {
   // the 'real' devices
   devices: [],
   deviceObjects: [],
@@ -23,12 +23,6 @@ const state = {
 }
 
 const mutations = {
-  activateSchema (state, schema) {
-    const file = require(`./schemas/${schema}.json`)
-    console.log('activating schema', file)
-    console.log(file.type)
-  },
-
   addDevice (state, device) {
     state.devices.push(device)
   },
@@ -55,12 +49,16 @@ const mutations = {
     state.relatedDevices = concat(state.relatedDevices, relationships)
   },
 
+  clearDevices (state) {
+    state = { ...initialState }
+  },
+
   selectEdge (state, index) {
     state.selected = { ...state.relatedDevices[index].commonSensors }
   },
 
   selectNode (state, index) {
-    state.selected = { ...state.devices[index] }
+    state.selected = { ...state.devices[index].getData() }
   },
 
   updateLog (state, update) {
@@ -84,11 +82,17 @@ const getters = {
 }
 
 const actions = {
-  activateSchema ({ commit }, schema) {
-    commit('activateSchema', schema)
+  activateSchema ({ commit, dispatch }, schemaFile) {
+    const schema = require(`./schemas/${schemaFile}.json`)
+    commit('clearDevices')
+    if (schema.type === 'iot') {
+      schema.nodes.map(node => {
+        dispatch('addDevice', node.sensors)
+      })
+    }
   },
-  addDevice ({ commit }) {
-    const device = new ArtificialIoT()
+  addDevice ({ commit }, sensors) {
+    const device = new ArtificialIoT(sensors)
     commit('addDevice', device)
     commit('addDeviceObject', device)
     commit('buildRelationships', device)
@@ -105,6 +109,8 @@ const actions = {
     commit('selectNode', index)
   }
 }
+
+const state = { ...initialState }
 
 export default new Vuex.Store({
   state, getters, mutations, actions
