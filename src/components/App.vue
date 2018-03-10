@@ -41,7 +41,7 @@ export default {
   data () {
     return {
       title: 'Simme',
-      description: 'Simme (Simulated Interactome) demonstrates functional interactions between IoT devices via sim  ulated IoT logs being rendered as an Interactome',
+      description: 'Simme (Simulated Interactome) demonstrates functional interactions between IoT devices via simulated IoT logs being rendered as an Interactome',
       selected: ''
     }
   },
