@@ -1,1 +1,133 @@
-{}
+{
+  "type": "iot",
+  "title": "Cascading Effects in a Hotel",
+  "description": "demonstrating cascading effects through electricity connected to gas, water, wifi",
+  "nodes": [
+    {
+      "title": "Room system",
+      "description": "Basic room systems",
+      "sensors": [
+        {
+          "type": "current",
+          "units": "kWh",
+          "max": "18",
+          "min": "12",
+          "digits": "3"
+        },
+        {
+          "type": "wifi signal strength (IEEE 802.11)",
+          "units": "dBm",
+          "max": "255",
+          "min": "0",
+          "digits": "0"
+        },
+        {
+          "type": "gas",
+          "units": "kWh",
+          "max": "3",
+          "min": "0",
+          "digits": "1"
+        },
+        {
+          "type": "water",
+          "units": "L",
+          "max": "120",
+          "min": "10",
+          "digits": "0"
+        },
+        {
+          "type": "room connection",
+          "units": "!",
+          "max": "1",
+          "min": "0",
+          "digits": "0"
+        }
+      ]
+    },
+    {
+      "title": "Building system",
+      "description": "Manage levels for a building",
+      "sensors": [
+        {
+          "type": "level connection",
+          "units": "!",
+          "max": "1",
+          "min": "0",
+          "digits": "0"
+        }
+      ]
+    },
+    {
+      "title": "Level system",
+      "description": "Manage rooms for a level",
+      "sensors": [
+        {
+          "type": "room connection",
+          "units": "!",
+          "max": "1",
+          "min": "0",
+          "digits": "0"
+        },
+        {
+          "type": "level connection",
+          "units": "!",
+          "max": "1",
+          "min": "0",
+          "digits": "0"
+        }
+      ]
+    },
+    {
+      "title": "Electricity",
+      "description": "Electric current flow in room",
+      "sensors": [
+        {
+          "type": "current",
+          "units": "kWh",
+          "max": "18",
+          "min": "12",
+          "digits": "3"
+        }
+      ]
+    },
+    {
+      "title": "Wifi",
+      "description": "Wifi connectivity in room",
+      "sensors": [
+        {
+          "type": "wifi signal strength (IEEE 802.11)",
+          "units": "dBm",
+          "max": "255",
+          "min": "0",
+          "digits": "0"
+        }
+      ]
+    },
+    {
+      "title": "Gas",
+      "description": " demonstrating cascading effects",
+      "sensors": [
+        {
+          "type": "gas",
+          "units": "kWh",
+          "max": "3",
+          "min": "0",
+          "digits": "1"
+        }
+      ]
+    },
+    {
+      "title": "Water",
+      "description": " demonstrating cascading effects",
+      "sensors": [
+        {
+          "type": "water",
+          "units": "L",
+          "max": "120",
+          "min": "10",
+          "digits": "0"
+        }
+      ]
+    }
+  ]
+}

@@ -1,3 +1,174 @@
-// eduroam wifi self-organisation where students from different organisations are grouped together
-// i.e. federated identity management
-{}
+{
+  "type": "iot",
+  "nodes": [
+    {
+      "name": "Alan",
+      "description": "",
+      "sensors": [
+        {
+          "type": "wifi-1",
+          "units": "",
+          "max": "",
+          "min": "",
+          "digits": ""
+        }
+      ]
+    },
+    {
+      "name": "",
+      "description": "",
+      "sensors": [
+        {
+          "type": "wifi-1",
+          "units": "",
+          "max": "",
+          "min": "",
+          "digits": ""
+        }
+      ]
+    },
+    {
+      "name": "",
+      "description": "",
+      "sensors": [
+        {
+          "type": "wifi-1",
+          "units": "",
+          "max": "",
+          "min": "",
+          "digits": ""
+        }
+      ]
+    },
+    {
+      "name": "",
+      "description": "",
+      "sensors": [
+        {
+          "type": "wifi-2",
+          "units": "",
+          "max": "",
+          "min": "",
+          "digits": ""
+        }
+      ]
+    },
+    {
+      "name": "",
+      "description": "",
+      "sensors": [
+        {
+          "type": "wifi-2",
+          "units": "",
+          "max": "",
+          "min": "",
+          "digits": ""
+        }
+      ]
+    },
+    {
+      "name": "",
+      "description": "",
+      "sensors": [
+        {
+          "type": "wifi-2",
+          "units": "",
+          "max": "",
+          "min": "",
+          "digits": ""
+        }
+      ]
+    },
+    {
+      "name": "",
+      "description": "",
+      "sensors": [
+        {
+          "type": "wifi-2",
+          "units": "",
+          "max": "",
+          "min": "",
+          "digits": ""
+        }
+      ]
+    },
+    {
+      "name": "",
+      "description": "",
+      "sensors": [
+        {
+          "type": "wifi-3",
+          "units": "",
+          "max": "",
+          "min": "",
+          "digits": ""
+        }
+      ]
+    },
+    {
+      "name": "",
+      "description": "",
+      "sensors": [
+        {
+          "type": "wifi-3",
+          "units": "",
+          "max": "",
+          "min": "",
+          "digits": ""
+        }
+      ]
+    },
+    {
+      "name": "",
+      "description": "",
+      "sensors": [
+        {
+          "type": "wifi-3",
+          "units": "",
+          "max": "",
+          "min": "",
+          "digits": ""
+        }
+      ]
+    },
+    {
+      "name": "",
+      "description": "",
+      "sensors": [
+        {
+          "type": "wifi-3",
+          "units": "",
+          "max": "",
+          "min": "",
+          "digits": ""
+        }
+      ]
+    },
+    {
+      "name": "",
+      "description": "",
+      "sensors": [
+        {
+          "type": "wifi-3",
+          "units": "",
+          "max": "",
+          "min": "",
+          "digits": ""
+        }
+      ]
+    },
+    {
+      "name": "",
+      "description": "",
+      "sensors": [
+        {
+          "type": "wifi-3",
+          "units": "",
+          "max": "",
+          "min": "",
+          "digits": ""
+        }
+      ]
+    }
+  ]
+}

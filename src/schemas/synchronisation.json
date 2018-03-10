@@ -1,8 +1,10 @@
 {
   "type": "iot",
+  "title": "Synchronisation in a Coffee Machine",
+  "description": "demonstrating synchronisation through a coffee machine",
   "nodes": [
     {
-      "name": "coffee pot",
+      "title": "coffee pot",
       "description": "A pot that has sensors for temperatue and volume of water",
       "sensors": [
         {
@@ -22,7 +24,7 @@
       ]
     },
     {
-      "name": "coffee grinder",
+      "title": "coffee grinder",
       "description": "Coffee grinder that grinds coffee at certain detected temperature threshold",
       "sensors": [
         {
