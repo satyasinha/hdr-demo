@@ -1,0 +1,32 @@
+{
+  "type": "iot",
+  "nodes": [
+    {
+      "name": "default",
+      "description": "default middleware sensors",
+      "sensors": [
+        {
+          "type": "temperature",
+          "units": "°C",
+          "max": "30",
+          "min": "5",
+          "digits": "2"
+        },
+        {
+          "type": "light",
+          "units": "lux",
+          "max": "25000",
+          "min": "0.001",
+          "digits": "3"
+        },
+        {
+          "type": "velocity",
+          "units": "m/sec",
+          "max": "100",
+          "min": "1",
+          "digits": "2"
+        }
+      ]
+    }
+  ]
+}

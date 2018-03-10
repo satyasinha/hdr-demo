@@ -7,7 +7,13 @@
     <div id="content">
       <interactome :nodes="nodes" :edges="edges"></interactome>
       <div id="sidebar">
-        <button @click="addDevice">Add Device</button>
+        <select v-model="selected">
+          <option disabled value="">Select a Schema</option>
+          <option  v-for="(schema, index) in schemas" :key="index">
+            {{ schema }}
+          </option>
+        </select>
+        <button @click="addDevice()">Add Device</button>
         <detail></detail>
         <stats></stats>
       </div>
@@ -28,21 +34,32 @@ export default {
     ...mapGetters([
       'edges',
       'logs',
-      'nodes'
+      'nodes',
+      'schemas'
     ])
   },
   data () {
     return {
       title: 'Simme',
-      description: 'Simme (Simulated Interactome) demonstrates functional interactions between IoT devices via simulated IoT logs being rendered as an Interactome'
+      description: 'Simme (Simulated Interactome) demonstrates functional interactions between IoT devices via simulated IoT logs being rendered as an Interactome',
+      selected: ''
     }
   },
   methods: {
     ...mapActions([
+      'activateSchema',
       'addDevice',
       'updateLogs'
     ])
   },
+
+  watch: {
+    selected: function (schema) {
+      console.log('watching selected', schema)
+      this.activateSchema(schema)
+    }
+  },
+
   mounted () {
     setInterval(function () {
       this.updateLogs()
