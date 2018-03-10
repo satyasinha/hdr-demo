@@ -58,7 +58,11 @@ const mutations = {
   },
 
   selectNode (state, index) {
-    state.selected = { ...state.devices[index].getData() }
+    state.selected = {
+      title: state.devices[index].getTitle(),
+      description: state.devices[index].getDescription(),
+      ...state.devices[index].getData()
+    }
   },
 
   updateLog (state, update) {
@@ -87,12 +91,13 @@ const actions = {
     commit('clearDevices')
     if (schema.type === 'iot') {
       schema.nodes.map(node => {
-        dispatch('addDevice', node.sensors)
+        dispatch('addDevice', node)
       })
     }
   },
-  addDevice ({ commit }, sensors) {
-    const device = new ArtificialIoT(sensors)
+  addDevice ({ commit }, node) {
+    const { sensors, title, description } = node
+    const device = new ArtificialIoT(sensors, title, description)
     commit('addDevice', device)
     commit('addDeviceObject', device)
     commit('buildRelationships', device)

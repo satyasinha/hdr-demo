@@ -14,14 +14,24 @@ class ArtificialIoT {
     return value.toFixed(digits)
   }
 
-  constructor (sensors = [DEFAULT_SENSORS[Math.floor(Math.random() * DEFAULT_SENSORS.length)]]) {
+  constructor (sensors = [DEFAULT_SENSORS[Math.floor(Math.random() * DEFAULT_SENSORS.length)]], title = '', description = '') {
     this.id = uuid()
+    this.title = title
+    this.description = description
     this.sensors = sensors
     this.fetchData()
   }
 
   getId () {
     return this.id
+  }
+
+  getTitle () {
+    return this.title
+  }
+
+  getDescription () {
+    return this.description
   }
 
   getSensors () {
