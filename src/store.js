@@ -29,7 +29,8 @@ const mutations = {
 
   addDeviceObject (state, device) {
     const id = device.getId()
-    state.deviceObjects.push({ id })
+    const title = device.getTitle()
+    state.deviceObjects.push({ id, title })
   },
 
   buildRelationships (state, device) {
@@ -96,7 +97,7 @@ const actions = {
     }
   },
   addDevice ({ commit }, node) {
-    const { sensors, title, description } = node
+    const { sensors, title, description } = node || {}
     const device = new ArtificialIoT(sensors, title, description)
     commit('addDevice', device)
     commit('addDeviceObject', device)
