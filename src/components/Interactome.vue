@@ -81,6 +81,22 @@ export default {
       return lines
     },
 
+    text () {
+      const text = this.svg
+        .selectAll('text')
+        .data(this.nodes)
+
+      text.exit().remove()
+      text
+        .enter().append('text')
+        .attr('font-family', 'sans-serif')
+        .attr('font-size', '15px')
+        .attr('fill', 'seagreen')
+        .text(node => node.title || node.id)
+
+      return text
+    },
+
     initiate () {
       this.width = this.$el.clientWidth
       this.height = this.$el.clientHeight
@@ -100,6 +116,7 @@ export default {
       this.interactome.on('tick', () => {
         const dots = this.dots()
         const lines = this.lines()
+        const text = this.text()
 
         dots
           .attr('cx', node => node.x || this.width / 2)
@@ -109,6 +126,9 @@ export default {
           .attr('y1', edge => edge.source.y || 0)
           .attr('x2', edge => edge.target.x || 0)
           .attr('y2', edge => edge.target.y || 0)
+        text
+          .attr('dx', node => node.x + 10)
+          .attr('dy', node => node.y + 10)
       })
     },
     simulation () {
