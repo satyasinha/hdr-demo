@@ -127,8 +127,8 @@ export default {
           .attr('x2', edge => edge.target.x || 0)
           .attr('y2', edge => edge.target.y || 0)
         text
-          .attr('dx', node => node.x + 10)
-          .attr('dy', node => node.y + 10)
+          .attr('dx', node => node.x + 10 || 0)
+          .attr('dy', node => node.y + 10 || 0)
       })
     },
     simulation () {
