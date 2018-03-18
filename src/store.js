@@ -9,17 +9,18 @@ Vue.use(Vuex)
 const initialState = {
   // the 'real' devices
   devices: [],
-  deviceObjects: [],
+  edges: [],
+  nodes: [],
   schemas: [
     'cascading-effects',
     'problem-solution',
     'self-organisation',
     'synchronisation'
   ],
+  schemaType: '',
   selected: {},
   // the data capture for the devices
-  sensorData: {},
-  relatedDevices: []
+  sensorData: {}
 }
 
 const mutations = {
@@ -30,7 +31,16 @@ const mutations = {
   addDeviceObject (state, device) {
     const id = device.getId()
     const title = device.getTitle()
-    state.deviceObjects.push({ id, title })
+    state.nodes.push({ id, title })
+  },
+
+  addEdge (state, edge) {
+    const { source, target } = edge
+    state.edges.push({source: state.nodes[source], target: state.nodes[target]})
+  },
+
+  addNode (state, node) {
+    state.nodes.push(node)
   },
 
   buildRelationships (state, device) {
@@ -47,7 +57,8 @@ const mutations = {
         })
       }
     })
-    state.relatedDevices = concat(state.relatedDevices, relationships)
+
+    state.edges = concat(state.edges, relationships)
   },
 
   clearDevices (state) {
@@ -55,15 +66,26 @@ const mutations = {
   },
 
   selectEdge (state, index) {
-    state.selected = { ...state.relatedDevices[index].commonSensors }
+    state.selected = { ...state.edges[index].commonSensors }
   },
 
   selectNode (state, index) {
-    state.selected = {
-      title: state.devices[index].getTitle(),
-      description: state.devices[index].getDescription(),
-      ...state.devices[index].getData()
+    if (state.schemaType === 'iot') {
+      state.selected = {
+        title: state.devices[index].getTitle(),
+        description: state.devices[index].getDescription(),
+        ...state.devices[index].getData()
+      }
+    } else if (state.schemaType === 'board') {
+      state.selected = {
+        title: state.nodes[index].title,
+        description: state.nodes[index].description || ''
+      }
     }
+  },
+
+  setSchemaType (state, type) {
+    state.schemaType = type
   },
 
   updateLog (state, update) {
@@ -77,23 +99,27 @@ const mutations = {
 }
 
 const getters = {
-  edges: state => state.relatedDevices,
+  edges: state => state.edges,
   logs: state => values(state.sensorData),
-  nodes: state => state.deviceObjects,
+  nodes: state => state.nodes,
   schemas: state => state.schemas,
   selected: state => state.selected,
-  totalEdges: state => state.relatedDevices.length,
-  totalNodes: state => state.deviceObjects.length
+  totalEdges: state => state.edges.length,
+  totalNodes: state => state.nodes.length
 }
 
 const actions = {
   activateSchema ({ commit, dispatch }, schemaFile) {
     const schema = require(`./schemas/${schemaFile}.json`)
     commit('clearDevices')
+    commit('setSchemaType', schema.type)
     if (schema.type === 'iot') {
       schema.nodes.map(node => {
         dispatch('addDevice', node)
       })
+    } else if (schema.type === 'board') {
+      schema.nodes.map(node => commit('addNode', node))
+      schema.edges.map(edge => commit('addEdge', edge))
     }
   },
   addDevice ({ commit }, node) {

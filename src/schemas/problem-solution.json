@@ -1,3 +1,39 @@
 {
-  "type": "board"
+  "type": "board",
+  "nodes": [
+    {
+      "title": "Context"
+    },
+    {
+      "title": "Validation"
+    },
+    {
+      "title": "Problem"
+    },
+    {
+      "title": "Solution"
+    }
+  ],
+  "edges": [
+    {
+      "source": 2,
+      "target": 0
+    },
+    {
+      "source": 2,
+      "target": 1
+    },
+    {
+      "source": 2,
+      "target": 3
+    },
+    {
+      "source": 0,
+      "target": 3
+    },
+    {
+      "source": 1,
+      "target": 3
+    }
+  ]
 }
