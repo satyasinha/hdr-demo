@@ -13,6 +13,7 @@ const initialState = {
   nodes: [],
   schemas: [
     'cascading-effects',
+    'research-thoughts',
     'problem-solution',
     'self-organisation',
     'synchronisation'

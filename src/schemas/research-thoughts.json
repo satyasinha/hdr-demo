@@ -1,0 +1,312 @@
+{
+  "type": "board",
+  "nodes": [
+    {
+      "title": "Artificial Endocrine Systems"
+    },
+    {
+      "title": "Problems to solve"
+    },
+    {
+      "title": "Not easy to predict demand in live environments"
+    },
+    {
+      "title": "Data -> Wisdom",
+      "description": "https://twitter.com/stephenhuppert/status/734157041300832256/photo/1"
+    },
+    {
+      "title": "Applications"
+    },
+    {
+      "title": "Analytics"
+    },
+    {
+      "title": "Middleware"
+    },
+    {
+      "title": "Visualisation"
+    },
+    {
+      "title": "Interactome"
+    },
+    {
+      "title": "Adinkra Symbols"
+    },
+    {
+      "title": "Uses Endocrine architecture"
+    },
+    {
+      "title": "Inspirations/Interests"
+    },
+    {
+      "title": "Back Pressure",
+      "description": "https://en.wikipedia.org/wiki/Back_pressure, to handle data in chunks"
+    },
+    {
+      "title": "metaphor of rain falling on different roofs",
+      "description": "no purpose but set rules of propagation"
+    },
+    {
+      "title": "Impact of cybernetics within AES",
+      "description": "Tolerance, collaboration, conflict"
+    },
+    {
+      "title": "paxos for consensus",
+      "description": "https://en.wikipedia.org/wiki/Paxos_(computer_science)"
+    },
+    {
+      "title": "homeostasis/negative feedback loop",
+      "description": "hibernation -> endocrine system -> temperature changes -> hormones -> coat thickening (metabolic reaction; thyroid, pituitary)"
+    },
+    {
+      "title": "Open Loop vs Closed Loop",
+      "description": "physiological systems are open systems as are IoT systems"
+    },
+    {
+      "title": "Intelligent Slime",
+      "description": "http://www.scientificamerican.com/article/brainless-slime-molds/"
+    },
+    {
+      "title": "biomimetics + biomimetics + big data",
+      "description": ""
+    },
+    {
+      "title": "organic computing",
+      "description": ""
+    },
+    {
+      "title": "incomplete information",
+      "description": "https://www.nature.com/articles/srep22916"
+    },
+    {
+      "title": "micro vs macro scale model",
+      "description": "https://en.wikipedia.org/wiki/Microscale_and_macroscale_models"
+    },
+    {
+      "title": "Domains",
+      "description": ""
+    },
+    {
+      "title": "synchronization",
+      "description": ""
+    },
+    {
+      "title": "self-organization",
+      "description": ""
+    },
+    {
+      "title": "cascading effects",
+      "description": ""
+    },
+    {
+      "title": "Case Studies",
+      "description": ""
+    },
+    {
+      "title": "Infrastructure oriented architectures",
+      "description": ""
+    },
+    {
+      "title": "Ideas",
+      "description": ""
+    },
+    {
+      "title": "focus on metabolism",
+      "description": "how energy is produced and consumed"
+    },
+    {
+      "title": "Predict patterns of usage",
+      "description": ""
+    },
+    {
+      "title": "Provide recommendations that can be overridden",
+      "description": ""
+    },
+    {
+      "title": "minimum energy bounding principle",
+      "description": ""
+    },
+    {
+      "title": "Implementation",
+      "description": ""
+    },
+    {
+      "title": "Tensor Flow",
+      "description": "https://www.tensorflow.org/"
+    },
+    {
+      "title": "IPV6",
+      "description": "http://iot6.eu/ipv6_for_iot"
+    },
+    {
+      "title": "MQTT",
+      "description": "https://www.ibm.com/developerworks/community/blogs/5things/entry/5_things_to_know_about_mqtt_the_protocol_for_internet_of_things?lang=en"
+    },
+    {
+      "title": "architecture",
+      "description": "https://goo.gl/photos/AKwCXdx7LG65bVpE9"
+    },
+    {
+      "title": "MongoDB",
+      "description": ""
+    }
+  ],
+  "edges": [
+    {
+      "source": 0,
+      "target": 1
+    },
+    {
+      "source": 1,
+      "target": 2
+    },
+    {
+      "source": 1,
+      "target": 3
+    },
+    {
+      "source": 0,
+      "target": 4
+    },
+    {
+      "source": 4,
+      "target": 5
+    },
+    {
+      "source": 4,
+      "target": 6
+    },
+    {
+      "source": 4,
+      "target": 7
+    },
+    {
+      "source": 7,
+      "target": 8
+    },
+    {
+      "source": 7,
+      "target": 9
+    },
+    {
+      "source": 6,
+      "target": 10
+    },
+    {
+      "source": 0,
+      "target": 11
+    },
+    {
+      "source": 11,
+      "target": 12
+    },
+    {
+      "source": 11,
+      "target": 13
+    },
+    {
+      "source": 11,
+      "target": 14
+    },
+    {
+      "source": 11,
+      "target": 15
+    },
+    {
+      "source": 11,
+      "target": 16
+    },
+    {
+      "source": 11,
+      "target": 17
+    },
+    {
+      "source": 11,
+      "target": 18
+    },
+    {
+      "source": 11,
+      "target": 19
+    },
+    {
+      "source": 11,
+      "target": 20
+    },
+    {
+      "source": 11,
+      "target": 21
+    },
+    {
+      "source": 11,
+      "target": 22
+    },
+    {
+      "source": 0,
+      "target": 23
+    },
+    {
+      "source": 23,
+      "target": 24
+    },
+    {
+      "source": 23,
+      "target": 25
+    },
+    {
+      "source": 23,
+      "target": 26
+    },
+    {
+      "source": 0,
+      "target": 27
+    },
+    {
+      "source": 27,
+      "target": 28
+    },
+    {
+      "source": 0,
+      "target": 29
+    },
+    {
+      "source": 29,
+      "target": 30
+    },
+    {
+      "source": 29,
+      "target": 31
+    },
+    {
+      "source": 29,
+      "target": 32
+    },
+    {
+      "source": 29,
+      "target": 33
+    },
+    {
+      "source": 0,
+      "target": 34
+    },
+    {
+      "source": 34,
+      "target": 35
+    },
+    {
+      "source": 34,
+      "target": 36
+    },
+    {
+      "source": 34,
+      "target": 37
+    },
+    {
+      "source": 34,
+      "target": 38
+    },
+    {
+      "source": 34,
+      "target": 39
+    }
+  ]
+}

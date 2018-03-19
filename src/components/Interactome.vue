@@ -6,6 +6,8 @@
 import * as d3 from 'd3'
 import { mapActions } from 'vuex'
 
+const RADIUS = 10
+
 export default {
   props: ['nodes', 'edges'],
 
@@ -35,10 +37,10 @@ export default {
         .selectAll('circle')
         .data(this.nodes)
         .on('mouseover', function () {
-          d3.select(this).attr('r', 15)
+          d3.select(this).attr('r', RADIUS + 5)
         })
         .on('mouseout', function () {
-          d3.select(this).attr('r', 10)
+          d3.select(this).attr('r', RADIUS)
         })
         .on('click', function (data) {
           selectNode(data.index)
@@ -119,8 +121,32 @@ export default {
         const text = this.text()
 
         dots
-          .attr('cx', node => node.x || this.width / 2)
-          .attr('cy', node => node.y || this.height / 2)
+          .attr('cx', node => {
+            if (!node.x) {
+              node.x = this.width / 2
+            }
+
+            if (node.x > this.width) {
+              node.x = this.width - RADIUS
+            } else if (node.x < 0) {
+              node.x = RADIUS
+            }
+
+            return node.x
+          })
+          .attr('cy', node => {
+            if (!node.y) {
+              node.y = this.height / 2
+            }
+
+            if (node.y > this.height) {
+              node.y = this.height - RADIUS
+            } else if (node.y < 0) {
+              node.y = RADIUS
+            }
+
+            return node.y
+          })
         lines
           .attr('x1', edge => edge.source.x || 0)
           .attr('y1', edge => edge.source.y || 0)
