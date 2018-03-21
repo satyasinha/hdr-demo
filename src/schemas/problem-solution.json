@@ -2,16 +2,20 @@
   "type": "board",
   "nodes": [
     {
-      "title": "Context"
+      "title": "Context",
+      "description": "The circumstances in which a problem (and a solution) exists"
     },
     {
-      "title": "Validation"
+      "title": "Validation",
+      "description": "Steps to validate a solution against a problem"
     },
     {
-      "title": "Problem"
+      "title": "Problem",
+      "description": "A scenario, situation or risk that needs to be overcome via solution"
     },
     {
-      "title": "Solution"
+      "title": "Solution",
+      "description": "A means to a resolution of a particular problem given a context"
     }
   ],
   "edges": [
