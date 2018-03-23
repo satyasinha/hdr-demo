@@ -6,7 +6,7 @@ import ArtificialIoT from './devices/ArtificialIoT'
 
 Vue.use(Vuex)
 
-const initialState = {
+const state = {
   // the 'real' devices
   devices: [],
   edges: [],
@@ -63,7 +63,11 @@ const mutations = {
   },
 
   clearDevices (state) {
-    state = { ...initialState }
+    state.devices = []
+    state.edges = []
+    state.nodes = []
+    state.selected = {}
+    state.sensorData = {}
   },
 
   selectEdge (state, index) {
@@ -142,8 +146,6 @@ const actions = {
     commit('selectNode', index)
   }
 }
-
-const state = { ...initialState }
 
 export default new Vuex.Store({
   state, getters, mutations, actions
