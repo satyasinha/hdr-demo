@@ -6,6 +6,8 @@
 import * as d3 from 'd3'
 import { mapActions } from 'vuex'
 
+const RADIUS = 10
+
 export default {
   props: ['nodes', 'edges'],
 
@@ -35,10 +37,10 @@ export default {
         .selectAll('circle')
         .data(this.nodes)
         .on('mouseover', function () {
-          d3.select(this).attr('r', 15)
+          d3.select(this).attr('r', RADIUS + 5)
         })
         .on('mouseout', function () {
-          d3.select(this).attr('r', 10)
+          d3.select(this).attr('r', RADIUS)
         })
         .on('click', function (data) {
           selectNode(data.index)
@@ -48,8 +50,7 @@ export default {
         .exit().remove()
       dots
         .enter().append('circle')
-        .attr('r', 10)
-        .attr('fill', 'gray').merge(dots)
+        .attr('r', 10).merge(dots)
         .attr('cx', this.width / 2)
         .attr('cy', this.height / 2)
 
@@ -119,16 +120,41 @@ export default {
         const text = this.text()
 
         dots
-          .attr('cx', node => node.x || this.width / 2)
-          .attr('cy', node => node.y || this.height / 2)
+          .attr('cx', node => {
+            if (!node.x) {
+              node.x = this.width / 2
+            }
+
+            if (node.x > this.width) {
+              node.x = this.width - RADIUS
+            } else if (node.x < 0) {
+              node.x = RADIUS
+            }
+
+            return node.x
+          })
+          .attr('cy', node => {
+            if (!node.y) {
+              node.y = this.height / 2
+            }
+
+            if (node.y > this.height) {
+              node.y = this.height - RADIUS
+            } else if (node.y < 0) {
+              node.y = RADIUS
+            }
+
+            return node.y
+          })
+          .attr('fill', node => node.fill || 'gray')
         lines
           .attr('x1', edge => edge.source.x || 0)
           .attr('y1', edge => edge.source.y || 0)
           .attr('x2', edge => edge.target.x || 0)
           .attr('y2', edge => edge.target.y || 0)
         text
-          .attr('dx', node => node.x + 10)
-          .attr('dy', node => node.y + 10)
+          .attr('dx', node => node.x + 10 || 0)
+          .attr('dy', node => node.y + 10 || 0)
       })
     },
     simulation () {

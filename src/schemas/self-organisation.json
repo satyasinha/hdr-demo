@@ -1,174 +1,70 @@
 {
-  "type": "iot",
+  "type": "board",
   "nodes": [
     {
-      "name": "Alan",
-      "description": "",
-      "sensors": [
-        {
-          "type": "wifi-1",
-          "units": "",
-          "max": "",
-          "min": "",
-          "digits": ""
-        }
-      ]
+      "title": "Alan",
+      "description": "UNSW",
+      "fill": "yellow"
     },
     {
-      "name": "",
-      "description": "",
-      "sensors": [
-        {
-          "type": "wifi-1",
-          "units": "",
-          "max": "",
-          "min": "",
-          "digits": ""
-        }
-      ]
+      "title": "Betty",
+      "description": "UNSW",
+      "fill": "yellow"
     },
     {
-      "name": "",
-      "description": "",
-      "sensors": [
-        {
-          "type": "wifi-1",
-          "units": "",
-          "max": "",
-          "min": "",
-          "digits": ""
-        }
-      ]
+      "title": "Candice",
+      "description": "UNSW",
+      "fill": "yellow"
     },
     {
-      "name": "",
-      "description": "",
-      "sensors": [
-        {
-          "type": "wifi-2",
-          "units": "",
-          "max": "",
-          "min": "",
-          "digits": ""
-        }
-      ]
+      "title": "Alfred",
+      "description": "UTS",
+      "fill": "blue"
     },
     {
-      "name": "",
-      "description": "",
-      "sensors": [
-        {
-          "type": "wifi-2",
-          "units": "",
-          "max": "",
-          "min": "",
-          "digits": ""
-        }
-      ]
+      "title": "Zeno",
+      "description": "UTS",
+      "fill": "blue"
     },
     {
-      "name": "",
-      "description": "",
-      "sensors": [
-        {
-          "type": "wifi-2",
-          "units": "",
-          "max": "",
-          "min": "",
-          "digits": ""
-        }
-      ]
+      "title": "Yvette",
+      "description": "UTS",
+      "fill": "blue"
     },
     {
-      "name": "",
-      "description": "",
-      "sensors": [
-        {
-          "type": "wifi-2",
-          "units": "",
-          "max": "",
-          "min": "",
-          "digits": ""
-        }
-      ]
+      "title": "Sam",
+      "description": "UTS",
+      "fill": "blue"
     },
     {
-      "name": "",
-      "description": "",
-      "sensors": [
-        {
-          "type": "wifi-3",
-          "units": "",
-          "max": "",
-          "min": "",
-          "digits": ""
-        }
-      ]
+      "title": "Francis",
+      "description": "USyd",
+      "fill": "red"
     },
     {
-      "name": "",
-      "description": "",
-      "sensors": [
-        {
-          "type": "wifi-3",
-          "units": "",
-          "max": "",
-          "min": "",
-          "digits": ""
-        }
-      ]
+      "title": "Steve",
+      "description": "USyd",
+      "fill": "red"
     },
     {
-      "name": "",
-      "description": "",
-      "sensors": [
-        {
-          "type": "wifi-3",
-          "units": "",
-          "max": "",
-          "min": "",
-          "digits": ""
-        }
-      ]
+      "title": "Sven",
+      "description": "USyd",
+      "fill": "red"
     },
     {
-      "name": "",
-      "description": "",
-      "sensors": [
-        {
-          "type": "wifi-3",
-          "units": "",
-          "max": "",
-          "min": "",
-          "digits": ""
-        }
-      ]
+      "title": "David",
+      "description": "UNSW",
+      "fill": "yellow"
     },
     {
-      "name": "",
-      "description": "",
-      "sensors": [
-        {
-          "type": "wifi-3",
-          "units": "",
-          "max": "",
-          "min": "",
-          "digits": ""
-        }
-      ]
+      "title": "Edith",
+      "description": "USyd",
+      "fill": "red"
     },
     {
-      "name": "",
-      "description": "",
-      "sensors": [
-        {
-          "type": "wifi-3",
-          "units": "",
-          "max": "",
-          "min": "",
-          "digits": ""
-        }
-      ]
+      "title": "Mario",
+      "description": "UTS",
+      "fill": "blue"
     }
   ]
 }
