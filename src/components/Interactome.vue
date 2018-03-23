@@ -50,8 +50,7 @@ export default {
         .exit().remove()
       dots
         .enter().append('circle')
-        .attr('r', 10)
-        .attr('fill', 'gray').merge(dots)
+        .attr('r', 10).merge(dots)
         .attr('cx', this.width / 2)
         .attr('cy', this.height / 2)
 
@@ -147,6 +146,7 @@ export default {
 
             return node.y
           })
+          .attr('fill', node => node.fill || 'gray')
         lines
           .attr('x1', edge => edge.source.x || 0)
           .attr('y1', edge => edge.source.y || 0)

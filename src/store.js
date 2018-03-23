@@ -119,8 +119,8 @@ const actions = {
         dispatch('addDevice', node)
       })
     } else if (schema.type === 'board') {
-      schema.nodes.map(node => commit('addNode', node))
-      schema.edges.map(edge => commit('addEdge', edge))
+      schema.nodes && schema.nodes.map(node => commit('addNode', node))
+      schema.edges && schema.edges.map(edge => commit('addEdge', edge))
     }
   },
   addDevice ({ commit }, node) {
