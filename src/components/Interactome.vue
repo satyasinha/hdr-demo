@@ -19,6 +19,14 @@ export default {
     edges: function (newEdges) {
       this.edges = newEdges
       this.reset()
+    },
+    height: function (newHeight) {
+      this.height = newHeight
+      this.reset()
+    },
+    width: function (newWidth) {
+      this.width = newWidth
+      this.reset()
     }
   },
 
@@ -100,13 +108,15 @@ export default {
 
     initiate () {
       this.svg = d3.select('svg')
-        .attr('width', this.width)
-        .attr('height', this.height)
     },
 
     reset () {
       if (this.interactome) this.interactome.stop()
       this.interactome = this.simulation()
+
+      this.svg
+        .attr('width', this.width)
+        .attr('height', this.height)
 
       this.interactome.nodes(this.nodes)
       this.interactome.force('link').links(this.edges)
