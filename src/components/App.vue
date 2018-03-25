@@ -4,8 +4,15 @@
       <h1>{{ title }}</h1>
       <p>{{ description }}</p>
     </div>
-    <div id="content">
-      <interactome :nodes="nodes" :edges="edges"></interactome>
+    <div id="container" ref="container">
+      <div id="content">
+      <interactome
+        :edges="edges"
+        :height="interactomeHeight"
+        :nodes="nodes"
+        :width="interactomeWidth"
+      ></interactome>
+      </div>
       <div id="sidebar">
         <select v-model="selected">
           <option disabled value="">Select a Schema</option>
@@ -42,6 +49,8 @@ export default {
     return {
       title: 'Simme',
       description: 'Simme (Simulated Interactome) demonstrates functional interactions between IoT devices via simulated IoT logs being rendered as an Interactome',
+      interactomeHeight: 400,
+      interactomeWidth: 500,
       selected: ''
     }
   },
@@ -50,7 +59,13 @@ export default {
       'activateSchema',
       'addDevice',
       'updateLogs'
-    ])
+    ]),
+    onResize () {
+      this.interactomeHeight = this.$refs.container.clientHeight - 5
+      this.interactomeWidth = this.$refs.container.clientWidth - 150
+      console.log('height: ', this.interactomeHeight)
+      console.log('width: ', this.interactomeWidth)
+    }
   },
 
   watch: {
@@ -61,19 +76,28 @@ export default {
   },
 
   mounted () {
+    window.addEventListener('resize', this.onResize)
+    this.onResize()
+
     setInterval(function () {
       this.updateLogs()
       // map(this.logs, log => {
       //   console.log(JSON.stringify(log))
       // })
     }.bind(this), 1000)
+  },
+
+  beforeDestroy () {
+    console.log('destroying!')
+    window.removeEventListener('resize', this.onResize)
   }
 }
 </script>
 
 <style>
+
 body {
-  height: 80vh;
+  height: 90vh;
 }
 
 #app {
@@ -81,11 +105,13 @@ body {
   height: 100%;
 }
 
-#content {
+#container {
+  height: calc(100% - 100px);
   display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  height: 100%;
+}
+
+#content {
+  flex: 1;
 }
 
 #sidebar {
@@ -94,4 +120,5 @@ body {
   flex-direction: column;
   justify-content: space-between;
 }
+
 </style>

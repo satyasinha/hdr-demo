@@ -1,5 +1,5 @@
 <template>
-  <svg width="80%" height="100%"></svg>
+  <svg :width="width" :height="height"></svg>
 </template>
 
 <script>
@@ -9,7 +9,7 @@ import { mapActions } from 'vuex'
 const RADIUS = 10
 
 export default {
-  props: ['nodes', 'edges'],
+  props: ['nodes', 'edges', 'width', 'height'],
 
   watch: {
     nodes: function (newNodes) {
@@ -18,6 +18,14 @@ export default {
     },
     edges: function (newEdges) {
       this.edges = newEdges
+      this.reset()
+    },
+    height: function (newHeight) {
+      this.height = newHeight
+      this.reset()
+    },
+    width: function (newWidth) {
+      this.width = newWidth
       this.reset()
     }
   },
@@ -99,16 +107,16 @@ export default {
     },
 
     initiate () {
-      this.width = this.$el.clientWidth
-      this.height = this.$el.clientHeight
       this.svg = d3.select('svg')
-        .attr('width', this.width)
-        .attr('height', this.height)
     },
 
     reset () {
       if (this.interactome) this.interactome.stop()
       this.interactome = this.simulation()
+
+      this.svg
+        .attr('width', this.width)
+        .attr('height', this.height)
 
       this.interactome.nodes(this.nodes)
       this.interactome.force('link').links(this.edges)
